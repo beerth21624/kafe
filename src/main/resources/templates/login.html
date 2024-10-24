@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kafe Application - Login</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .kafe-container {
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    .kafe-title {
+      color: #5a2d0c;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .coffee-icon {
+      color: #5a2d0c;
+      font-size: 4rem;
+      margin-right: 0.5rem;
+    }
+    .form-label {
+      color: #5a2d0c;
+      font-weight: 600;
+    }
+    .btn-kafe {
+      background-color: #5a2d0c;
+      border-color: #5a2d0c;
+      color: #ffffff;
+    }
+    .btn-kafe:hover {
+      background-color: #4a250a;
+      border-color: #4a250a;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 kafe-container">
+      <h1 class="display-5 kafe-title">
+        <i class="fas fa-mug-hot coffee-icon"></i>Login
+      </h1>
+
+      <form th:action="@{/login}" method="POST">
+        <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
+          Invalid username or password
+        </div>
+        <div id="logout-msg" th:if="${param.logout}" class="alert alert-success">
+          You have been logged out
+        </div>
+
+        <div class="mb-3">
+          <label for="inputUsername" class="form-label">Username</label>
+          <input type="text" name="username" id="inputUsername" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input type="password" name="password" id="inputPassword" class="form-control" required>
+        </div>
+        <button id="submit-button" type="submit" class="btn btn-kafe">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

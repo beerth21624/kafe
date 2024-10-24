@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafe Web Application</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .kafe-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        .kafe-title {
+            color: #5a2d0c;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .coffee-icon {
+            color: #5a2d0c;
+            font-size: 4rem;
+            margin-right: 0.5rem;
+        }
+        .btn-kafe {
+            background-color: #5a2d0c;
+            border-color: #5a2d0c;
+            color: #ffffff;
+        }
+        .btn-kafe:hover {
+            background-color: #4a250a;
+            border-color: #4a250a;
+            color: #ffffff;
+        }
+        .greeting {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 kafe-container">
+            <h1 class="display-4 kafe-title">
+                <i class="fas fa-mug-hot coffee-icon"></i>Welcome to Kafe
+            </h1>
+            <p class="greeting"><span th:text="${greeting}"></span></p>
+            <div id="success-msg" class="alert alert-success"
+                 th:if="${confirmOrder}">
+                Your order has been successfully submitted !
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <p>สวัสดีครับคุณ <b><span sec:authentication="name"></span></b></p>
+                <a class="btn btn-kafe" th:href="@{/logout}">Logout</a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a class="btn btn-kafe me-2" th:href="@{/login}">Login</a>
+                <a class="btn btn-outline-secondary" th:href="@{/signup}">Sign Up</a>
+            </div>
+
+            <hr class="my-4">
+            <p class="lead">Enjoy our selection of premium coffees and teas.</p>
+            <a class="btn btn-outline-primary" href="#">View Menu</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
